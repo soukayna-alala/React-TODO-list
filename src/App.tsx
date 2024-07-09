@@ -16,7 +16,7 @@ import { useState } from "react";
  */
 
 function App() {
-  const [todoList, setTodoList] = useState<string[]>(["add car"]);
+  const [todoList, setTodoList] = useState<string[]>([]);
   const { container } = styles;
 
   /**
@@ -30,13 +30,21 @@ function App() {
     });
   };
 
+  function handleDelete(todoDelete: string) {
+    setTodoList((existingTodoList: string[]) => {
+      return existingTodoList.filter((i) => i !== todoDelete);
+    });
+  }
+
   return (
     <>
       <div className={container}>
         <h1>TODO LIST</h1>
         <AddTodo onAddTodo={onAddTodo} />
         {todoList.length
-          ? todoList.map((i) => <Todo todo={i} key={i} />)
+          ? todoList.map((i) => (
+              <Todo todo={i} key={i} onDelete={handleDelete} />
+            ))
           : "Empty todo list, please add some tasks..."}
       </div>
     </>

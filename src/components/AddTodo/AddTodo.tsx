@@ -12,6 +12,7 @@ export function AddTodo({ onAddTodo }: AddTodoProps) {
     const todo = inputField.current.value.trim();
 
     onAddTodo(todo);
+    inputField.current.value = "";
   }
 
   return (
