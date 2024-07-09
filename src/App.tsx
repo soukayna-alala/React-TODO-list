@@ -1,5 +1,6 @@
-import "./App.css";
 import { AddTodo } from "./components/AddTodo/AddTodo.tsx";
+import "reset-css";
+import styles from "./App.module.css";
 
 /**
  * Instructions
@@ -12,10 +13,17 @@ import { AddTodo } from "./components/AddTodo/AddTodo.tsx";
  */
 
 function App() {
+  const { container } = styles;
+
+  const onAddTodo = (todo: string) => {
+    console.log("onAddTodo fired", todo);
+  };
+
   return (
     <>
-      <div>
-        <AddTodo />
+      <div className={container}>
+        <h1>TODO LIST</h1>
+        <AddTodo onAddTodo={onAddTodo} />
       </div>
     </>
   );

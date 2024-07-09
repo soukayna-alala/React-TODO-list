@@ -1,8 +1,25 @@
-export function AddTodo() {
+import { FormEvent, useRef } from "react";
+import styles from "./AddTodo.module.css";
+import { AddTodoProps } from "./interfaces.ts";
+
+export function AddTodo({ onAddTodo }: AddTodoProps) {
+  const { input, addBtn } = styles;
+  const inputField = useRef<HTMLInputElement>(null!);
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    const todo = inputField.current.value.trim();
+
+    onAddTodo(todo);
+  }
+
   return (
-    <form>
-      <input type="text" />
-      <button type="submit">Add task</button>
+    <form onSubmit={handleSubmit}>
+      <input className={input} type="text" ref={inputField} />
+      <button className={addBtn} type="submit">
+        add task
+      </button>
     </form>
   );
 }
