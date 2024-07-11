@@ -3,6 +3,7 @@ import "reset-css";
 import styles from "./App.module.css";
 import { Todo } from "./components/Todo/Todo.tsx";
 import { useState } from "react";
+import { ITodo } from "./components/Todo/interfaces.ts";
 
 /**
  * Instructions
@@ -16,23 +17,32 @@ import { useState } from "react";
  */
 
 function App() {
-  const [todoList, setTodoList] = useState<string[]>([]);
+  const [todoList, setTodoList] = useState<ITodo[]>([]);
   const { container } = styles;
 
   /**
    * Function that will fire when a user enters a new todo
    * and submits the form by pressing the add task button
-   * @param newTodo string
+   * @param newTodoName
    */
-  const onAddTodo = (newTodo: string) => {
-    setTodoList((existingTodoList: string[]) => {
-      return [...existingTodoList, newTodo];
-    });
+  const onAddTodo = (newTodoName: string) => {
+    if (newTodoName.length) {
+      const newTodo: ITodo = {
+        name: newTodoName,
+        timeStamp: new Date().toString(),
+      };
+
+      setTodoList((existingTodoList: ITodo[]) => {
+        return [...existingTodoList, newTodo];
+      });
+    }
   };
 
-  function handleDelete(todoDelete: string) {
-    setTodoList((existingTodoList: string[]) => {
-      return existingTodoList.filter((i) => i !== todoDelete);
+  function handleDelete(todoDelete: ITodo) {
+    setTodoList((existingTodoList: ITodo[]) => {
+      return existingTodoList.filter(
+        (i) => i.timeStamp !== todoDelete.timeStamp,
+      );
     });
   }
 
@@ -43,7 +53,7 @@ function App() {
         <AddTodo onAddTodo={onAddTodo} />
         {todoList.length
           ? todoList.map((i) => (
-              <Todo todo={i} key={i} onDelete={handleDelete} />
+              <Todo todo={i} key={i.timeStamp} onDelete={handleDelete} />
             ))
           : "Empty todo list, please add some tasks..."}
       </div>

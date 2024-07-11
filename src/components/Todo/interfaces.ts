@@ -1,4 +1,9 @@
 export interface TodoProps {
-  todo: string;
-  onDelete: (todoDelete: string) => void;
+  todo: ITodo;
+  onDelete: (todoDelete: ITodo) => void;
+}
+
+export interface ITodo {
+  name: string;
+  timeStamp: string;
 }
