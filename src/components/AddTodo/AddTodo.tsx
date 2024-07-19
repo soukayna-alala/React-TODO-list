@@ -17,7 +17,12 @@ export function AddTodo({ onAddTodo }: AddTodoProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input className={input} type="text" ref={inputField} />
+      <input
+        className={input}
+        type="text"
+        ref={inputField}
+        placeholder="type your todo "
+      />
       <button className={addBtn} type="submit">
         add task
       </button>

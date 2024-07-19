@@ -18,8 +18,7 @@ import { ITodo } from "./components/Todo/interfaces.ts";
 
 function App() {
   const [todoList, setTodoList] = useState<ITodo[]>([]);
-  const { container } = styles;
-
+  const { container, title, todosWrapper, EmptyTodo } = styles;
   /**
    * Function that will fire when a user enters a new todo
    * and submits the form by pressing the add task button
@@ -49,13 +48,19 @@ function App() {
   return (
     <>
       <div className={container}>
-        <h1>TODO LIST</h1>
+        <p className={title}>TODO LIST</p>
         <AddTodo onAddTodo={onAddTodo} />
-        {todoList.length
-          ? todoList.map((i) => (
+        <div className={todosWrapper}>
+          {todoList.length ? (
+            todoList.map((i) => (
               <Todo todo={i} key={i.timeStamp} onDelete={handleDelete} />
             ))
-          : "Empty todo list, please add some tasks..."}
+          ) : (
+            <p className={EmptyTodo}>
+              Empty todo list, please add some tasks...
+            </p>
+          )}
+        </div>
       </div>
     </>
   );

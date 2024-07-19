@@ -1,4 +1,65 @@
 .container {
   display: grid;
-  grid-template-columns: auto auto 100px;
+  gap: 8px;
+  padding: 10px;
+  background-color: #fff;
+  /*grid-template-columns: 20% 40% 20% 20%;*/
+  grid-template-columns: 24px auto 24px 24px;
+  align-items: center;
+}
+
+.deleteBtn,
+.modifyBox {
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+.trash,
+.pen {
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkBox {
+  margin: auto;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  /*grid-column: 1;*/
+  /*grid-row: 1 / span 3;*/
+}
+
+.todoName {
+  font-size: 18px;
+  color: #6b6b6b;
+  /*grid-column: 2;*/
+  /*grid-row: 1 / span 2;*/
+}
+
+.time {
+  padding-top: 4px;
+  /*grid-row: 2 / span 3;*/
+  font-size: 12px;
+  color: #949494;
+}
+
+.deleteBtn {
+  /*grid-column: 3;*/
+  /*grid-row: 1 / span 3;*/
+}
+
+.modifyBox {
+  /*grid-column: 4;*/
+  /*grid-row: 1 / span 3;*/
+}
+
+.completed {
+  text-decoration: line-through;
 }
