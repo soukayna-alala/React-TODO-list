@@ -1,13 +1,9 @@
 .container {
-  /*text-align: center;*/
   margin: auto;
   max-width: 480px;
   padding: 14px;
   font-family: Arial, Helvetica, sans-serif;
   display: grid;
-  grid-template-columns: auto; /*@media (min-width: 480px) {*/
-  /*  max-width: 800px;*/
-  /*}*/
 }
 
 .title {

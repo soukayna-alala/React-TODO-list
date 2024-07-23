@@ -4,31 +4,18 @@ import styles from "./App.module.css";
 import { Todo } from "./components/Todo/Todo.tsx";
 import { useState } from "react";
 import { ITodo } from "./components/Todo/interfaces.ts";
-
-/**
- * Instructions
- * ------------
- *
- * 1. When page loads for the first time show heading, input on the left and blue add task button on the right side.
- *    And a message "Empty todo list, please add some tasks.." beneath (as its an empty list)
- * 2. Once the user enters a todo in the input field then clicking on the `Add task` button should save the todo in the todo list.
- * 3. Clicking the delete icon on a todo should remove that todo from the list.
- * 4. Use a standard html checkbox, and when its ticked add a strikethrough to the todo using css class. Clicking it again should do the opposite and remove the strikethrough.
- */
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [todoList, setTodoList] = useState<ITodo[]>([]);
   const { container, title, todosWrapper, EmptyTodo } = styles;
-  /**
-   * Function that will fire when a user enters a new todo
-   * and submits the form by pressing the add task button
-   * @param newTodoName
-   */
+
   const onAddTodo = (newTodoName: string) => {
-    if (newTodoName.length) {
+    if (newTodoName.trim().length) {
       const newTodo: ITodo = {
         name: newTodoName,
         timeStamp: new Date().toString(),
+        id: uuidv4(),
       };
 
       setTodoList((existingTodoList: ITodo[]) => {
@@ -39,10 +26,26 @@ function App() {
 
   function handleDelete(todoDelete: ITodo) {
     setTodoList((existingTodoList: ITodo[]) => {
-      return existingTodoList.filter(
-        (i) => i.timeStamp !== todoDelete.timeStamp,
-      );
+      return existingTodoList.filter((i) => i.id !== todoDelete.id);
     });
+  }
+
+  function handleModify(id: string, modifiedName: string) {
+    function modifyTodoList(existingTodoList: ITodo[]) {
+      return existingTodoList.map((i) => {
+        if (i.id === id) {
+          return {
+            name: modifiedName,
+            timeStamp: new Date().toString(),
+            id: uuidv4(),
+          };
+        } else {
+          return i;
+        }
+      });
+    }
+
+    setTodoList(modifyTodoList);
   }
 
   return (
@@ -53,7 +56,12 @@ function App() {
         <div className={todosWrapper}>
           {todoList.length ? (
             todoList.map((i) => (
-              <Todo todo={i} key={i.timeStamp} onDelete={handleDelete} />
+              <Todo
+                todo={i}
+                key={i.timeStamp}
+                onDelete={handleDelete}
+                onModify={handleModify}
+              />
             ))
           ) : (
             <p className={EmptyTodo}>

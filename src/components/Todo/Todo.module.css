@@ -3,9 +3,8 @@
   gap: 8px;
   padding: 10px;
   background-color: #fff;
-  /*grid-template-columns: 20% 40% 20% 20%;*/
-  grid-template-columns: 24px auto 24px 24px;
   align-items: center;
+  grid-template-columns: 24px auto 24px 24px;
 }
 
 .deleteBtn,
@@ -32,34 +31,41 @@
   width: 20px;
   height: 20px;
   align-items: center;
-  /*grid-column: 1;*/
-  /*grid-row: 1 / span 3;*/
 }
 
 .todoName {
   font-size: 18px;
   color: #6b6b6b;
-  /*grid-column: 2;*/
-  /*grid-row: 1 / span 2;*/
 }
 
 .time {
   padding-top: 4px;
-  /*grid-row: 2 / span 3;*/
   font-size: 12px;
   color: #949494;
 }
 
-.deleteBtn {
-  /*grid-column: 3;*/
-  /*grid-row: 1 / span 3;*/
-}
-
-.modifyBox {
-  /*grid-column: 4;*/
-  /*grid-row: 1 / span 3;*/
-}
-
 .completed {
   text-decoration: line-through;
+}
+
+.saveBtn {
+  color: #fff;
+  background-color: #016bd3;
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+}
+
+.saveBtn:hover {
+  background-color: #0e8cff;
+  cursor: pointer;
+}
+
+.modifyInput {
+  padding: 6px;
+  border: none;
+  color: #676881;
+  background-color: #ecedf5;
+  border-radius: 7px;
+  margin-right: 4px;
 }
