@@ -7,8 +7,10 @@ import { ITodo } from "./components/Todo/interfaces.ts";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const [todoList, setTodoList] = useState<ITodo[]>([]);
-  const { container, title, todosWrapper, EmptyTodo } = styles;
+  const cachedList = localStorage.getItem("todoList");
+  const initialValue = cachedList ? JSON.parse(cachedList) : [];
+  const [todoList, setTodoList] = useState<ITodo[]>(initialValue);
+  const { container, title, todosWrapper, error } = styles;
 
   const onAddTodo = (newTodoName: string) => {
     if (newTodoName.trim().length) {
@@ -19,7 +21,9 @@ function App() {
       };
 
       setTodoList((existingTodoList: ITodo[]) => {
-        return [...existingTodoList, newTodo];
+        const updatedTodoList = [...existingTodoList, newTodo];
+        localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
+        return updatedTodoList;
       });
     }
   };
@@ -64,9 +68,7 @@ function App() {
               />
             ))
           ) : (
-            <p className={EmptyTodo}>
-              Empty todo list, please add some tasks...
-            </p>
+            <p className={error}>Empty todo list, please add some tasks...</p>
           )}
         </div>
       </div>
