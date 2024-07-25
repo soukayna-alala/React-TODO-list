@@ -21,7 +21,8 @@ export function AddTodo({ onAddTodo }: AddTodoProps) {
         className={input}
         type="text"
         ref={inputField}
-        placeholder="type your todo "
+        placeholder="type your todo"
+        id={"add-todo"}
       />
       <button className={addBtn} type="submit">
         add task

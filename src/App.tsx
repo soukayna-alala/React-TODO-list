@@ -30,13 +30,18 @@ function App() {
 
   function handleDelete(todoDelete: ITodo) {
     setTodoList((existingTodoList: ITodo[]) => {
-      return existingTodoList.filter((i) => i.id !== todoDelete.id);
+      const updatedTodoList = existingTodoList.filter(
+        (i) => i.id !== todoDelete.id,
+      );
+      localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
+
+      return updatedTodoList;
     });
   }
 
   function handleModify(id: string, modifiedName: string) {
-    function modifyTodoList(existingTodoList: ITodo[]) {
-      return existingTodoList.map((i) => {
+    setTodoList((existingTodoList: ITodo[]) => {
+      const updatedTodoList = existingTodoList.map((i) => {
         if (i.id === id) {
           return {
             name: modifiedName,
@@ -47,9 +52,11 @@ function App() {
           return i;
         }
       });
-    }
 
-    setTodoList(modifyTodoList);
+      localStorage.setItem("todoList", JSON.stringify(updatedTodoList));
+
+      return updatedTodoList;
+    });
   }
 
   return (
